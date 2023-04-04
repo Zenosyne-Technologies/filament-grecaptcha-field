@@ -1,15 +1,19 @@
-{!! NoCaptcha::renderJs(app()->getLocale()) !!}
+@push('scripts')
+    <script type="text/javascript">
 
-<script>
-    document.addEventListener('livewire:load', function () {
-        @this.
-        on('resetCaptcha', () => window.grecaptcha.reset())
+    grecaptcha.enterprise.ready(async () => {
+        const token = await grecaptcha.enterprise.execute(fercaptcha.g_site_key, {action: 'homepage'});
+        fercaptcha.token = token;
+        window.Livewire.find('{{$this->id}}').$set('{{$getStatePath()}}', token);
     });
 
-    var recaptchaCallback = () => window.Livewire.find('{{$this->id}}')
-        .set('{{$getStatePath()}}', window.grecaptcha.getResponse(), true);
+    document.addEventListener('livewire:load', function () {
+        window.Livewire.find('{{$this->id}}').$set('{{$getStatePath()}}', 'meh')
+    });
 
+    
 </script>
+@endpush
 
 <x-dynamic-component
     :component="$getFieldWrapperView()"
@@ -26,16 +30,14 @@
 >
     <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }"
          wire:ignore
-         x-on:next-wizard-step.window="window.grecaptcha.reset()"
          x-on:expand-concealing-component.window="
-                         if (document.body.querySelector('[data-validation-error]') !== null) {
-                                    window.grecaptcha.reset()
-                        }
-                        error = $el.parentElement.querySelector('[data-validation-error]')
-                        if(! error) return;
-                        setTimeout(() => $el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }), 200)
+  error = $el.parentElement.querySelector('[data-validation-error]');
+  if (!error) return;
+  setTimeout(() => $el.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+    inline: 'start'
+  }), 200);                       
                ">
-        {!! NoCaptcha::display(['data-callback' => 'recaptchaCallback']) !!}
     </div>
 </x-dynamic-component>
-

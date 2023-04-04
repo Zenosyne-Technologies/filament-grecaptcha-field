@@ -1,29 +1,20 @@
 <?php
 
-namespace AbanoubNassem\FilamentGRecaptchaField\Forms\Components;
+namespace Zenosyne\FilamentEnterpriseGRecaptchaField\Forms\Components;
 
 use Filament\Forms\Components\Field;
-
+use Zenosyne\FilamentEnterpriseGRecaptchaField\Rules\ReCaptchaEnterpriseRule;
 
 class GRecaptcha extends Field
 {
-    protected string $view = 'filament-grecaptcha-field::forms.components.g-recaptcha';
+    protected string $view = 'filament-enterprise-grecaptcha-field::forms.components.g-recaptcha';
 
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->rules('required|captcha');
+        $this->rules(['required', new ReCaptchaEnterpriseRule]);
         $this->dehydrated(false);
         $this->label('');
-    }
-
-    public function callAfterStateUpdated(): static
-    {
-        parent::callAfterStateUpdated();
-
-        $this->getLivewire()->emit('resetCaptcha');
-
-        return $this;
     }
 }

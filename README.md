@@ -12,14 +12,14 @@ This plugin is built on top of [anhskohbo/no-captcha](https://github.com/anhskoh
 You can install the package via composer:
 
 ```bash
-composer require abanoubnassem/filament-grecaptcha-field
+composer require zenosyne/filament-enterprise-grecaptcha-field
 ```
 
 Since the package depends on [anhskohbo/no-captcha](https://github.com/anhskohbo/no-captcha) package. You may publish the configuration by running:
+
 ```bash
 php artisan vendor:publish --provider="Anhskohbo\NoCaptcha\NoCaptchaServiceProvider"
 ```
-
 
 ### Configuration
 
@@ -29,6 +29,7 @@ Add `NOCAPTCHA_SECRET` and `NOCAPTCHA_SITEKEY` in **.env** file :
 NOCAPTCHA_SECRET=secret-key
 NOCAPTCHA_SITEKEY=site-key
 ```
+
 (You can obtain them from [here](https://www.google.com/recaptcha/admin))
 
 ## Usage
@@ -45,8 +46,8 @@ use AbanoubNassem\FilamentGRecaptchaField\Forms\Components\GRecaptcha;
                 ]);
      }
 
-//forntend-forms 
-    public $captcha = ''; // must be initialized 
+//forntend-forms
+    public $captcha = ''; // must be initialized
     protected function getFormSchema(): array
     {
         return [
@@ -55,7 +56,6 @@ use AbanoubNassem\FilamentGRecaptchaField\Forms\Components\GRecaptcha;
         ];
     }
 ```
-
 
 ## Changelog
 

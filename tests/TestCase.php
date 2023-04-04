@@ -1,10 +1,10 @@
 <?php
 
-namespace AbanoubNassem\FilamentGRecaptchaField\Tests;
+namespace Zenosyne\FilamentGRecaptchaField\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use AbanoubNassem\FilamentGRecaptchaField\FilamentGRecaptchaFieldServiceProvider;
+use Zenosyne\FilamentGRecaptchaField\FilamentGRecaptchaFieldServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'AbanoubNassem\\FilamentGRecaptchaField\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Zenosyne\\FilamentGRecaptchaField\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

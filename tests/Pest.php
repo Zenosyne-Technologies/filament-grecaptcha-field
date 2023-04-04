@@ -1,5 +1,5 @@
 <?php
 
-use AbanoubNassem\FilamentGRecaptchaField\Tests\TestCase;
+use Zenosyne\FilamentGRecaptchaField\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
