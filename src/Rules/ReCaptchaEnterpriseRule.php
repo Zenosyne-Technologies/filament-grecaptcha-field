@@ -5,6 +5,7 @@ namespace Zenosyne\FilamentEnterpriseGRecaptchaField\Rules;
 use Illuminate\Contracts\Validation\ValidationRule as Rule;
 use Closure;
 use Http;
+use Illuminate\Support\Facades\Log;
 
 class ReCaptchaEnterpriseRule implements Rule
 {
@@ -28,7 +29,12 @@ class ReCaptchaEnterpriseRule implements Rule
         ]);
 
         if ($response->status() === 403) {
-            $fail('Unauthorized app');
+            $fail(__('Unauthorized app'));
+        }
+
+        if ($response->status() !== 200) {
+            $fail(__('reCaptcha failed'));
+            Log::error('reCaptcha failed');
         }
 
     }
